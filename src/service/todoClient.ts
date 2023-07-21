@@ -1,4 +1,4 @@
-import { TodoType } from "../src/components/TodoList";
+import { TodoType } from "../components/TodoList";
 
 export default class TodoClient {
   private httpClient: string;
@@ -20,16 +20,15 @@ export default class TodoClient {
   }
 
   public updateTodo(request: updateReq) {
-    fetch("http://localhost:3000/api/todo", {
+    fetch(`http://localhost:3000/api/todo/${request._id}`, {
       method: "PUT",
-      body: JSON.stringify(request),
+      body: JSON.stringify({ todo: request.todo }),
     });
   }
 
-  public deleteTodo(id: number) {
-    fetch("http://localhost:3000/api/todo", {
+  public deleteTodo(id: string) {
+    fetch(`http://localhost:3000/api/todo/${id}`, {
       method: "DELETE",
-      body: JSON.stringify({ id }),
     });
   }
 }

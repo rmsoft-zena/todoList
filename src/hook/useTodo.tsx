@@ -1,4 +1,4 @@
-import TodoClient from "../../service/todoClient";
+import TodoClient from "../service/todoClient";
 import { TodoType } from "../components/TodoList";
 import {
   UseQueryResult,
@@ -20,17 +20,21 @@ export default function useTodo() {
     todoClient.getTodos()
   );
 
-  const createTodo = useMutation(
-    (text: string) => todoClient.createTodo(text),
-    { onSuccess: invalidateQuery }
-  );
+  const createTodo = useMutation({
+    mutationKey: ["createTodo"],
+    mutationFn: async (text: string) => todoClient.createTodo(text),
+    onSuccess: invalidateQuery,
+  });
 
-  const updateTodo = useMutation(
-    (req: TodoType) => todoClient.updateTodo(req),
-    { onSuccess: invalidateQuery }
-  );
+  const updateTodo = useMutation({
+    mutationKey: ["updateTodo"],
+    mutationFn: async (req: TodoType) => todoClient.updateTodo(req),
+    onSuccess: invalidateQuery,
+  });
 
-  const deleteTodo = useMutation((id: number) => todoClient.deleteTodo(id), {
+  const deleteTodo = useMutation({
+    mutationKey: ["deleteTodo"],
+    mutationFn: async (id: string) => todoClient.deleteTodo(id),
     onSuccess: invalidateQuery,
   });
 

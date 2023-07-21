@@ -8,7 +8,7 @@ import { useRecoilState } from "recoil";
 import { todoCountState } from "@/atom/todoCountState";
 
 export type TodoType = {
-  _id: number;
+  _id: string;
   todo: string;
 };
 
